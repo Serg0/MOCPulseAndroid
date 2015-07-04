@@ -5,12 +5,12 @@ import com.google.gson.annotations.Expose;
 /**
  * Created by Serhii Nadolynskyi <serhii.nadolinskyi@gmail.com> on 04.07.15.
  */
-public class PushNotificationToken {
+public class Token {
 
     @Expose
-    private Token appData;
+    private String pushToken;
 
-    public PushNotificationToken(String pushToken) {
-        this.appData = new Token(pushToken);
+    public Token(String pushToken) {
+        this.pushToken = pushToken;
     }
 }

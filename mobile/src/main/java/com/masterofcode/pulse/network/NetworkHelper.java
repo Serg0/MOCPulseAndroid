@@ -2,6 +2,8 @@ package com.masterofcode.pulse.network;
 
 import android.text.TextUtils;
 
+import com.masterofcode.pulse.App;
+
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 
@@ -12,12 +14,10 @@ public class NetworkHelper {
 
 //    public static final String PULSE_API_ENDPOINT = "http://192.168.4.71:3000";
     public static final String PULSE_API_ENDPOINT = "http://192.168.4.81:3000";
-    public static final String MOC_ID_API_ENDPOINT = "http://192.168.4.81:3000";
-    public static final String TOKEN_MOC_ID = null;
-    public static final String TOKEN_PULSE = null;
+    public static final String MOC_ID_API_ENDPOINT = "http://192.168.4.121:3000";
+
     public static PulseApiService pulseApiService;
     public static MOCIDApiService mocIdApiService;
-
 
     public static void init(){
 
@@ -28,13 +28,12 @@ public class NetworkHelper {
     }
 
     private static void initMOCidAPI() {
-        //TODO method implementation
 
         RequestInterceptor requestInterceptor = new RequestInterceptor() {
             @Override
             public void intercept(RequestFacade request) {
-                if(!TextUtils.isEmpty(TOKEN_MOC_ID)){
-                    request.addHeader("Authorization", "Bearer " + TOKEN_MOC_ID);
+                if(!TextUtils.isEmpty(App.getTokenMocId())){
+                    request.addHeader("Authorization", "Bearer " + App.getTokenMocId());
                 }
 
             }
@@ -56,8 +55,8 @@ public class NetworkHelper {
         RequestInterceptor requestInterceptor = new RequestInterceptor() {
             @Override
             public void intercept(RequestFacade request) {
-                if(!TextUtils.isEmpty(TOKEN_PULSE)){
-                    request.addHeader("auth_token", TOKEN_PULSE);
+                if(!TextUtils.isEmpty(App.getTokenPulse())){
+                    request.addHeader("auth_token", App.getTokenPulse());
                 }
 
             }

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.masterofcode.pulse.models.Vote;
 import com.masterofcode.pulse.models.containers.VotesContainer;
 import com.masterofcode.pulse.ui.BaseActivity;
+import com.masterofcode.pulse.ui.VotesActivity;
 
 import java.util.List;
 
@@ -68,6 +69,7 @@ public class MainActivity extends BaseActivity {
         ButterKnife.inject(this);
 
 //        startActivity(new Intent(this, LoginActivity.class));
+        startActivity(new Intent(this, VotesActivity.class));
     }
 
     @Override
