@@ -62,7 +62,6 @@ public class MainActivity extends BaseActivity {
         return result;
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -35,6 +35,7 @@ public class GCMHelper extends ContextWrapper{
         void onError(String error);
         void onSuccess(String token);
     }
+
     public GCMHelper(BaseActivity base, GCMCallBack cb) {
         super(base);
         activity = base;
