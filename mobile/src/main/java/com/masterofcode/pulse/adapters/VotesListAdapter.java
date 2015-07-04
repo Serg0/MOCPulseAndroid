@@ -41,6 +41,9 @@ public class VotesListAdapter extends RecyclerView.Adapter<VotesListAdapter.View
 
     @Override
     public int getItemCount() {
+        if(votes == null){
+            return 0;
+        }
         return votes.size();
     }
 

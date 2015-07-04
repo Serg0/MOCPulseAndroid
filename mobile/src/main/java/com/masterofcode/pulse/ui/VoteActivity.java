@@ -35,6 +35,7 @@ public class VoteActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vote);
+        ButterKnife.inject(this);
         vote = getIntent().getParcelableExtra(EXTRA_VOTE);
         if (vote == null) {
             Log.e(App.TAG, "vote == null");
@@ -42,7 +43,6 @@ public class VoteActivity extends BaseActivity {
             Log.d(App.TAG, "vote: "+vote.toString());
             text.setText(vote.getName());
         }
-        ButterKnife.inject(this);
     }
 
     @OnClick({R.id.green, R.id.yellow, R.id.red})

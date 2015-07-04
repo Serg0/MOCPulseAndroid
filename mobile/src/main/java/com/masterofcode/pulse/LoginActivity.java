@@ -71,6 +71,7 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void failure(RetrofitError error) {
                 showToast("set push token error!");
+                getUser();
             }
         });
 

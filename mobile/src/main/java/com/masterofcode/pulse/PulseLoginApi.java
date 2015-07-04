@@ -36,6 +36,10 @@ public class PulseLoginApi
     mWebView.getSettings().setDisplayZoomControls(false);
     mWebView.setWebViewClient(mWebViewClient);
 
+//    clearCookies(webView);
+  }
+
+  private void clearCookies(@NonNull WebView webView) {
     CookieSyncManager.createInstance(webView.getContext());
     CookieManager cookieManager = CookieManager.getInstance();
     cookieManager.removeAllCookie();

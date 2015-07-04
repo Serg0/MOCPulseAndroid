@@ -46,6 +46,14 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
+            android:name=".ui.VoteActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".ui.VotesActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
             android:name=".GCMActivity">
         </activity>
 

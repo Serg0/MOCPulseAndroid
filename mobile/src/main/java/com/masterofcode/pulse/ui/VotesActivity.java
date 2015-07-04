@@ -50,6 +50,9 @@ public class VotesActivity extends BaseActivity {
             //do nothing
         }else if(votes.size() == 1){
             //TODO open single voting
+            Intent intent = new Intent(this, VoteActivity.class);
+            intent.putExtra(VoteActivity.EXTRA_VOTE, votes.iterator().next());
+            startActivity(intent);
         }else{
             //TODO open vote list
         }
