@@ -1,5 +1,6 @@
 package com.masterofcode.pulse.network;
 
+import com.masterofcode.pulse.models.containers.PushNotificationToken;
 import com.masterofcode.pulse.models.containers.VotesContainer;
 
 import retrofit.Callback;
@@ -15,7 +16,7 @@ import retrofit.http.Path;
 public interface MOCIDApiService {
 
     @POST("/api/me/data")
-    void setPushNotificationToken(@Body Callback<Object> cb);
+    void setPushNotificationToken(@Body PushNotificationToken token, Callback<Object> cb);
 
 
 }
