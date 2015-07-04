@@ -1,32 +1,67 @@
 package com.masterofcode.pulse;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
 
-public class LoginActivity extends AppCompatActivity {
-    private WebView mWebView;
+import com.masterofcode.pulse.models.containers.PushNotificationToken;
+import com.masterofcode.pulse.network.gcm.GCMHelper;
+import com.masterofcode.pulse.ui.BaseActivity;
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+
+public class LoginActivity extends BaseActivity {
+    @InjectView(R.id.webView)
+    WebView mWebView;
+
+    private String gcmToken = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ButterKnife.inject(this);
 
-        mWebView = (WebView) findViewById(R.id.webView);
-        new PulseLoginApi(mWebView, new PulseLoginApi.Callback() {
+        new GCMHelper(this, new GCMHelper.GCMCallBack() {
             @Override
-            public void onTokenParsed(String accessToken, String refreshToken) {
-                Log.d("x", String.format("accessToken: %s; refreshToken: %s", accessToken, refreshToken));
+            public void onError(String error) {
+                showToast("Got GCM error: "+error);
             }
 
             @Override
-            public void onError() {
-                Log.d("x", "Error");
+            public void onSuccess(final String token) {
+                showToast("Got GCM token: "+token);
+                App.getIDService().setPushNotificationToken(new PushNotificationToken(token), new Callback<Object>() {
+                    @Override
+                    public void success(Object o, Response response) {
+                        showToast("Push notification token successfully set!");
+                        new PulseLoginApi(mWebView, new PulseLoginApi.Callback() {
+                            @Override
+                            public void onTokenParsed(String accessToken, String refreshToken) {
+                                Log.d("x", String.format("accessToken: %s; refreshToken: %s", accessToken, refreshToken));
+                                App.setTokenPulse(accessToken);
+                            }
+
+                            @Override
+                            public void onError() {
+                                Log.d("x", "Error");
+                            }
+                        }).authorize();
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        showToast("Push notification set error!");
+                    }
+                });
             }
-        }).authorize();
+        });
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.masterofcode.pulse;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -8,7 +9,6 @@ import android.widget.TextView;
 import com.masterofcode.pulse.models.Vote;
 import com.masterofcode.pulse.models.containers.VotesContainer;
 import com.masterofcode.pulse.ui.BaseActivity;
-import com.masterofcode.pulse.ui.VotesActivity;
 
 import java.util.List;
 
@@ -66,8 +66,8 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
 
-//        startActivity(new Intent(this, LoginActivity.class));
-        startActivity(new Intent(this, VotesActivity.class));
+        startActivity(new Intent(this, LoginActivity.class));
+//        startActivity(new Intent(this, VotesActivity.class));
     }
 
     @Override
