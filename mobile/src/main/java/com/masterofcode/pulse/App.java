@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import com.masterofcode.pulse.network.MOCIDApiService;
 import com.masterofcode.pulse.network.NetworkHelper;
 import com.masterofcode.pulse.network.PulseApiService;
+import com.masterofcode.pulse.network.gcm.NotificationHelper;
 
 import me.alexrs.prefs.lib.Prefs;
 
@@ -17,6 +18,16 @@ public class App extends Application {
     public static String TOKEN_MOC_ID = null;
     public static String TOKEN_PULSE = null;
     private static App instance;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        NetworkHelper.init();
+        instance = this;
+        NotificationHelper.init(this);
+
+    }
+
 
     public static String getTokenMocId() {
         if(TextUtils.isEmpty(TOKEN_MOC_ID)){
@@ -43,16 +54,6 @@ public class App extends Application {
         TOKEN_PULSE = tokenPulse;
     }
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        NetworkHelper.init();
-        instance = this;
-
-
-
-
-    }
 
     public static PulseApiService getService(){
         return NetworkHelper.pulseApiService;
