@@ -22,7 +22,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        NetworkHelper.init();
+        NetworkHelper.init(this);
         instance = this;
         NotificationHelper.init(this);
 

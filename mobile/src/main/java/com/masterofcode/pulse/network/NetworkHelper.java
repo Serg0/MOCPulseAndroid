@@ -1,14 +1,20 @@
 package com.masterofcode.pulse.network;
 
+import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.masterofcode.pulse.App;
+import com.masterofcode.pulse.LoginActivity;
 
+import retrofit.ErrorHandler;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 import retrofit.converter.GsonConverter;
 
 /**
@@ -25,7 +31,10 @@ public class NetworkHelper {
     public static MOCIDApiService mocIdApiService;
     private static Gson gson;
 
-    public static void init(){
+    public static Context sContext;
+
+    public static void init(Context context){
+        sContext = context;
 
         initGSON();
         initPulseAPI();
@@ -80,10 +89,23 @@ public class NetworkHelper {
             }
         };
 
+        ErrorHandler loginErrorHandler = new ErrorHandler() {
+            @Override
+            public Throwable handleError(RetrofitError cause) {
+                Response r = cause.getResponse();
+                if (r != null && r.getStatus() == 401) {
+                    NetworkHelper.sContext.startActivity(new Intent(sContext, LoginActivity.class));
+                    return cause;
+                }
+                return cause;
+            }
+        };
+
         RestAdapter restAdapter = new RestAdapter.Builder()
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .setEndpoint(PULSE_API_ENDPOINT)
                 .setRequestInterceptor(requestInterceptor)
+                .setErrorHandler(loginErrorHandler)
                 .setConverter(new GsonConverter(gson))
                 .build();
 
