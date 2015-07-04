@@ -19,6 +19,10 @@ import java.util.Set;
  */
 public class NotificationHelper {
 
+    public static Set<Vote> getVotes() {
+        return votes;
+    }
+
     static Set<Vote> votes = new HashSet<Vote>();
     private static NotificationManager mNotificationManager;
     private static Context context;

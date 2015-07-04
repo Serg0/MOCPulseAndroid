@@ -1,5 +1,6 @@
 package com.masterofcode.pulse.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.PagerAdapter;
@@ -9,7 +10,11 @@ import android.support.v7.widget.Toolbar;
 import com.masterofcode.pulse.App;
 import com.masterofcode.pulse.R;
 import com.masterofcode.pulse.adapters.VoteTabsAdapter;
+import com.masterofcode.pulse.models.Vote;
 import com.masterofcode.pulse.models.containers.VotesContainer;
+import com.masterofcode.pulse.network.gcm.NotificationHelper;
+
+import java.util.Set;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -34,6 +39,26 @@ public class VotesActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_votes);
         ButterKnife.inject(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        final Set<Vote> votes = NotificationHelper.getVotes();
+        if(votes.isEmpty()){
+            //do nothing
+        }else if(votes.size() == 1){
+            //TODO open single voting
+        }else{
+            //TODO open vote list
+        }
+        NotificationHelper.cancelAll();
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
     }
 
     @Override
