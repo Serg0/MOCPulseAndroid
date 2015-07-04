@@ -8,9 +8,11 @@ import android.widget.TextView;
 
 import com.masterofcode.pulse.models.Vote;
 import com.masterofcode.pulse.models.containers.VotesContainer;
+import com.masterofcode.pulse.network.gcm.NotificationHelper;
 import com.masterofcode.pulse.ui.BaseActivity;
 
 import java.util.List;
+import java.util.Random;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -66,8 +68,26 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
 
-        startActivity(new Intent(this, LoginActivity.class));
+//        startActivity(new Intent(this, LoginActivity.class));
 //        startActivity(new Intent(this, VotesActivity.class));
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        NotificationHelper.cancelAll();
+    }
+
+    private void testNotifications() {
+        final Vote vote = new Vote();
+        final int id = new Random().nextInt();
+        vote.setId(id);
+        vote.setName("Some name " + id);
+        showToast(vote.getName());
+
+        NotificationHelper.showNotification(vote);
+
     }
 
     @Override
