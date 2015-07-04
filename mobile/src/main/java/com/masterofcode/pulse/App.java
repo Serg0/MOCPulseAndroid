@@ -31,6 +31,7 @@ public class App extends Application {
     }
 
     public static String getTokenPulse() {
+
         if(TextUtils.isEmpty(TOKEN_PULSE)){
             TOKEN_PULSE = Prefs.with(instance).getString("TOKEN_PULSE", "");
         }
