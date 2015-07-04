@@ -15,6 +15,8 @@ import me.alexrs.prefs.lib.Prefs;
  */
 public class App extends Application {
 
+    public static final String TAG = "Pulse";
+
     public static String TOKEN_MOC_ID = null;
     public static String TOKEN_PULSE = null;
     private static App instance;

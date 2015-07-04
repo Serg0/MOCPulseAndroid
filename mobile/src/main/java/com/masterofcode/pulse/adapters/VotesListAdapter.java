@@ -1,6 +1,7 @@
 package com.masterofcode.pulse.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,11 +11,13 @@ import android.widget.TextView;
 
 import com.masterofcode.pulse.R;
 import com.masterofcode.pulse.models.Vote;
+import com.masterofcode.pulse.ui.VoteActivity;
 
 import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 /**
  * Created by sonerik on 7/4/2015.
@@ -61,6 +64,13 @@ public class VotesListAdapter extends RecyclerView.Adapter<VotesListAdapter.View
         public ViewHolder(View view) {
             super(view);
             ButterKnife.inject(this, view);
+        }
+
+        @OnClick(R.id.card)
+        public void onClicked() {
+            Intent intent = new Intent(context, VoteActivity.class);
+            intent.putExtra(VoteActivity.EXTRA_VOTE, votes.get(getAdapterPosition()));
+            context.startActivity(intent);
         }
     }
 
