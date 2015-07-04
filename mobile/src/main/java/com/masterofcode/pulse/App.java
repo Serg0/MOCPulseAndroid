@@ -2,6 +2,7 @@ package com.masterofcode.pulse;
 
 import android.app.Application;
 
+import com.masterofcode.pulse.network.MOCIDApiService;
 import com.masterofcode.pulse.network.NetworkHelper;
 import com.masterofcode.pulse.network.PulseApiService;
 
@@ -20,5 +21,9 @@ public class App extends Application {
 
     public static PulseApiService getService(){
         return NetworkHelper.pulseApiService;
+    }
+
+    public static MOCIDApiService getIDService(){
+        return NetworkHelper.mocIdApiService;
     }
 }

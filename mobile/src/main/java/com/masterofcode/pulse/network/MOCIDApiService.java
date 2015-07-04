@@ -14,17 +14,8 @@ import retrofit.http.Path;
  */
 public interface MOCIDApiService {
 
-    @GET("/votes")
-    void getVotes(Callback<VotesContainer> cb);
-
-    @POST("/votes")
-    void sendVote(@Body VotesContainer votesContainer, Callback<VotesContainer> cb);
-
-    @GET("/votes/{voteId}")
-    void getVote(@Path("voteId") Integer voteId, Callback<VotesContainer> cb);
-
-    @PUT("/votes/{voteId}")
-    void updateVote(@Path("voteId") Integer voteId, @Body VotesContainer votesContainer, Callback<VotesContainer> cb);
+    @POST("/api/me/data")
+    void setPushNotificationToken(@Body Callback<Object> cb);
 
 
 }
