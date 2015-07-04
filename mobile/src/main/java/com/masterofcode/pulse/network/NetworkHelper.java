@@ -17,7 +17,8 @@ import retrofit.converter.GsonConverter;
 public class NetworkHelper {
 
 //    public static final String PULSE_API_ENDPOINT = "http://192.168.4.71:3000";
-    public static final String PULSE_API_ENDPOINT = "http://192.168.4.81:3000";
+    public static final String PULSE_API_ENDPOINT = "http://192.168.4.51:3000";
+//    public static final String PULSE_API_ENDPOINT = "http://192.168.4.81:3000";
     public static final String MOC_ID_API_ENDPOINT = "http://192.168.4.121:3000";
 
     public static PulseApiService pulseApiService;

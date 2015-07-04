@@ -1,5 +1,6 @@
 package com.masterofcode.pulse;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -9,6 +10,7 @@ import android.webkit.WebView;
 import com.masterofcode.pulse.models.containers.PushNotificationToken;
 import com.masterofcode.pulse.network.gcm.GCMHelper;
 import com.masterofcode.pulse.ui.BaseActivity;
+import com.masterofcode.pulse.ui.VotesActivity;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -37,29 +39,31 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onSuccess(final String token) {
                 showToast("Got GCM token: "+token);
-                App.getIDService().setPushNotificationToken(new PushNotificationToken(token), new Callback<Object>() {
+                new PulseLoginApi(mWebView, new PulseLoginApi.Callback() {
                     @Override
-                    public void success(Object o, Response response) {
-                        showToast("Push notification token successfully set!");
-                        new PulseLoginApi(mWebView, new PulseLoginApi.Callback() {
+                    public void onTokenParsed(String accessToken, String refreshToken) {
+                        Log.d("x", String.format("accessToken: %s; refreshToken: %s", accessToken, refreshToken));
+                        App.setTokenMocId(accessToken);
+                        App.getIDService().setPushNotificationToken(new PushNotificationToken(token), new Callback<Object>() {
                             @Override
-                            public void onTokenParsed(String accessToken, String refreshToken) {
-                                Log.d("x", String.format("accessToken: %s; refreshToken: %s", accessToken, refreshToken));
-                                App.setTokenPulse(accessToken);
+                            public void success(Object o, Response response) {
+                                showToast("Push notification token successfully set!");
+                                startActivity(new Intent(LoginActivity.this, VotesActivity.class));
                             }
 
                             @Override
-                            public void onError() {
-                                Log.d("x", "Error");
+                            public void failure(RetrofitError error) {
+                                showToast("Push notification set error!");
                             }
-                        }).authorize();
+                        });
+
                     }
 
                     @Override
-                    public void failure(RetrofitError error) {
-                        showToast("Push notification set error!");
+                    public void onError() {
+                        Log.d("x", "Error");
                     }
-                });
+                }).authorize();
             }
         });
     }
