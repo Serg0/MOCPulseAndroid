@@ -10,7 +10,8 @@ import retrofit.RestAdapter;
  */
 public class NetworkHelper {
 
-    public static final String API_ENDPOINT = "http://192.168.4.71:3000";
+//    public static final String API_ENDPOINT = "http://192.168.4.71:3000";
+    public static final String API_ENDPOINT = "http://192.168.4.81:3000";
     public static final String TOKEN = null;
     public static PulseApiService pulseApiService;
 
@@ -28,6 +29,7 @@ public class NetworkHelper {
         };
 
         RestAdapter restAdapter = new RestAdapter.Builder()
+                .setLogLevel(RestAdapter.LogLevel.FULL)
                 .setEndpoint(API_ENDPOINT)
                 .setRequestInterceptor(requestInterceptor)
                 .build();

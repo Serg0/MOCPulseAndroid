@@ -47,4 +47,14 @@ public class Vote {
     public void setResult(String result) {
         this.result = result;
     }
+
+    @Override
+    public String toString() {
+        return "Vote{" +
+                "name='" + name + '\'' +
+                ", id=" + id +
+                ", type=" + type +
+                ", result='" + result + '\'' +
+                '}';
+    }
 }

@@ -12,6 +12,12 @@ public class VotesContainer {
 
     @Expose
     private ArrayList<Vote> votes;
+    @Expose
+    private Vote vote;
+
+    public VotesContainer(Vote vote) {
+        this.vote = vote;
+    }
 
     public ArrayList<Vote> getVotes() {
         return votes;
@@ -19,5 +25,13 @@ public class VotesContainer {
 
     public void setVotes(ArrayList<Vote> votes) {
         this.votes = votes;
+    }
+
+    public Vote getVote() {
+        return vote;
+    }
+
+    public void setVote(Vote vote) {
+        this.vote = vote;
     }
 }
