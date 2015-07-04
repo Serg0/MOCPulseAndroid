@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.masterofcode.pulse.R;
+import com.masterofcode.pulse.adapters.VotesListAdapter;
 import com.masterofcode.pulse.models.Vote;
 
 import java.util.ArrayList;
@@ -30,11 +31,12 @@ public class VotesListFragment extends Fragment {
     @InjectView(R.id.recycler)
     RecyclerView recycler;
 
-    public static void newInstance(List<Vote> votes) {
+    public static Fragment newInstance(List<Vote> votes) {
         Fragment fragment = new VotesListFragment();
         Bundle b = new Bundle();
         b.putParcelableArrayList(VOTES_ARG, (ArrayList<Vote>) votes);
         fragment.setArguments(b);
+        return fragment;
     }
 
     @Override
@@ -55,6 +57,7 @@ public class VotesListFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recycler.setAdapter(new VotesListAdapter(getActivity(), votes));
     }
 
     @Override
