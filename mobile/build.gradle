@@ -24,4 +24,7 @@ dependencies {
     wearApp project(':wear')
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.google.android.gms:play-services:7.5.0'
+    compile('com.wu-man:android-oauth-client:0.0.3') {
+        exclude module: 'support-v4'
+    }
 }
