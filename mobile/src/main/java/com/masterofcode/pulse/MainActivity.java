@@ -1,6 +1,5 @@
 package com.masterofcode.pulse;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -43,7 +42,6 @@ public class MainActivity extends BaseActivity {
                 showToast("Fail");
             }
         });
-
 
     }
 

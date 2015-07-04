@@ -16,6 +16,7 @@ import com.koushikdutta.ion.Ion;
 
 public class PulseLoginApi
 {
+  // TODO: replace with variables in some file, referenced from buildscript
   private static final String CLIENT_ID = "9c7afff0c27f5ab2827edc7414f917931025ef4dbd7ed1d44acb1a1e82abd968";
   private static final String CLIENT_SECRET = "847bb22841f7950052f719202168e81c1500bde58979e8da7a296312b0b1f1db";
   private static final String REDIRECT_URI = "http://localhost/Callback";
