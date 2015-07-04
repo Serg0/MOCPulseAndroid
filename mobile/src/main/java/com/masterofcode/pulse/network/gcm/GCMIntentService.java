@@ -1,4 +1,4 @@
-package com.masterofcode.pulse;
+package com.masterofcode.pulse.network.gcm;
  
 import android.app.IntentService;
 import android.app.NotificationManager;
@@ -7,7 +7,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
- 
+
+import com.masterofcode.pulse.MainActivity;
+import com.masterofcode.pulse.R;
+
 public class GCMIntentService extends IntentService {
  
    public static final int NOTIFICATION_ID = 1000;

@@ -1,4 +1,4 @@
-package com.masterofcode.pulse;
+package com.masterofcode.pulse.network.gcm;
 
 import android.app.Activity;
 import android.content.ComponentName;
