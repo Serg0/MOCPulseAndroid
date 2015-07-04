@@ -41,10 +41,13 @@ public class LoginActivity extends AppCompatActivity {
                 BearerToken.authorizationHeaderAccessMethod(),
                 AndroidHttp.newCompatibleTransport(),
                 new JacksonFactory(),
-                new GenericUrl("https://socialservice.com/oauth/token"),
-                new ClientParametersAuthentication("CLIENT_ID", "CLIENT_SECRET"),
-                "CLIENT_ID",
-                "https://socialservice.com/oauth2/authorize");
+                new GenericUrl("http://192.168.4.121:3000/oauth/token"),
+                new ClientParametersAuthentication(
+                        "9c7afff0c27f5ab2827edc7414f917931025ef4dbd7ed1d44acb1a1e82abd968",
+                        "847bb22841f7950052f719202168e81c1500bde58979e8da7a296312b0b1f1db"
+                ),
+                "9c7afff0c27f5ab2827edc7414f917931025ef4dbd7ed1d44acb1a1e82abd968",
+                "http://192.168.4.121:3000/oauth/authorize");
         builder.setCredentialStore(credentialStore);
         AuthorizationFlow flow = builder.build();
 
@@ -63,10 +66,14 @@ public class LoginActivity extends AppCompatActivity {
 
                 };
 
-        new OAuthManager(flow, controller).authorizeImplicitly("userId", new OAuthManager.OAuthCallback<Credential>() {
+        new OAuthManager(flow, controller).authorizeImplicitly("client_id", new OAuthManager.OAuthCallback<Credential>() {
             @Override
             public void run(OAuthManager.OAuthFuture<Credential> future) {
-
+                try {
+                    Log.d("x", future.getResult().getAccessToken());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }, new Handler());
     }
