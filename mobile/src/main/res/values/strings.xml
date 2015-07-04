@@ -10,4 +10,6 @@
     <string name="registered_gcm">registered with GCM</string>
     <string name="have_events_to_vote">You have some events to vote</string>
     <string name="vote_me">Vote me!</string>
+    <string name="pending">Pending</string>
+    <string name="voted">Voted</string>
 </resources>
