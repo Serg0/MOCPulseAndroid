@@ -70,6 +70,7 @@ public class MainActivity extends BaseActivity {
         ButterKnife.inject(this);
 
 //        startActivity(new Intent(this, LoginActivity.class));
+        startActivity(new Intent(this, GCMActivity.class));
     }
 
     @Override

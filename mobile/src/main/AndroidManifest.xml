@@ -48,7 +48,7 @@
 
         <!-- For receiving GCM message and registration success -->
         <receiver
-            android:name=".GcmBroadcastReceiver"
+            android:name=".network.gcm.GcmBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND" >
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
@@ -57,7 +57,7 @@
             </intent-filter>
         </receiver>
 
-        <service android:name=".GCMIntentService" />
+        <service android:name=".network.gcm.GCMIntentService" />
         <!-- make sure to add google-play-services_lib from  project properties->android->library-->
         <meta-data
             android:name="com.google.android.gms.version"
