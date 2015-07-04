@@ -1,111 +1,32 @@
 package com.masterofcode.pulse;
 
-import android.accounts.AccountManager;
-import android.accounts.AccountManagerCallback;
-import android.accounts.AccountManagerFuture;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import com.google.api.client.auth.oauth2.BearerToken;
-import com.google.api.client.auth.oauth2.ClientParametersAuthentication;
-import com.google.api.client.auth.oauth2.Credential;
-import com.google.api.client.extensions.android.http.AndroidHttp;
-import com.google.api.client.http.GenericUrl;
-import com.google.api.client.json.jackson.JacksonFactory;
-import com.wuman.android.auth.AuthorizationFlow;
-import com.wuman.android.auth.AuthorizationUIController;
-import com.wuman.android.auth.DialogFragmentController;
-import com.wuman.android.auth.OAuthManager;
-import com.wuman.android.auth.oauth2.store.SharedPreferencesCredentialStore;
-
-import java.io.IOException;
+import android.webkit.WebView;
 
 public class LoginActivity extends AppCompatActivity {
+    private WebView mWebView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        SharedPreferencesCredentialStore credentialStore =
-                new SharedPreferencesCredentialStore(this,
-                        "auth", new JacksonFactory());
-
-        AuthorizationFlow.Builder builder = new AuthorizationFlow.Builder(
-                BearerToken.authorizationHeaderAccessMethod(),
-                AndroidHttp.newCompatibleTransport(),
-                new JacksonFactory(),
-                new GenericUrl("http://192.168.4.121:3000/oauth/token"),
-                new ClientParametersAuthentication(
-                        "9c7afff0c27f5ab2827edc7414f917931025ef4dbd7ed1d44acb1a1e82abd968",
-                        "847bb22841f7950052f719202168e81c1500bde58979e8da7a296312b0b1f1db"
-                ),
-                "9c7afff0c27f5ab2827edc7414f917931025ef4dbd7ed1d44acb1a1e82abd968",
-                "http://192.168.4.121:3000/oauth/authorize");
-        builder.setCredentialStore(credentialStore);
-        AuthorizationFlow flow = builder.build();
-
-        AuthorizationUIController controller =
-                new DialogFragmentController(getFragmentManager()) {
-
-                    @Override
-                    public String getRedirectUri() throws IOException {
-                        return "http://localhost/Callback";
-                    }
-
-                    @Override
-                    public boolean isJavascriptEnabledForWebView() {
-                        return true;
-                    }
-
-                };
-
-        new OAuthManager(flow, controller).authorizeImplicitly("client_id", new OAuthManager.OAuthCallback<Credential>() {
+        mWebView = (WebView) findViewById(R.id.webView);
+        new PulseLoginApi(mWebView, new PulseLoginApi.Callback() {
             @Override
-            public void run(OAuthManager.OAuthFuture<Credential> future) {
-                try {
-                    Log.d("x", future.getResult().getAccessToken());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Handler());
-    }
-
-    private class OnTokenAcquired implements AccountManagerCallback<Bundle> {
-        @Override
-        public void run(AccountManagerFuture<Bundle> result) {
-            // Get the result of the operation from the AccountManagerFuture.
-            Bundle bundle = null;
-            try {
-                bundle = result.getResult();
-            } catch (Exception ignored) {
+            public void onTokenParsed(String accessToken, String refreshToken) {
+                Log.d("x", String.format("accessToken: %s; refreshToken: %s", accessToken, refreshToken));
             }
 
-            // The token is a named value in the bundle. The name of the value
-            // is stored in the constant AccountManager.KEY_AUTHTOKEN.
-            String token = bundle.getString(AccountManager.KEY_AUTHTOKEN);
-
-            Intent launch = (Intent) bundle.get(AccountManager.KEY_INTENT);
-            if (launch != null) {
-                startActivityForResult(launch, 0);
-                return;
+            @Override
+            public void onError() {
+                Log.d("x", "Error");
             }
-        }
-    }
-
-    private class OnError implements Handler.Callback {
-        @Override
-        public boolean handleMessage(Message message) {
-            Log.d("x", "OnError");
-            return false;
-        }
+        }).authorize();
     }
 
     @Override
