@@ -57,11 +57,6 @@ public class VotesActivity extends BaseActivity {
     }
 
     @Override
-    protected void onNewIntent(Intent intent) {
-        super.onNewIntent(intent);
-    }
-
-    @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         App.getService().getVotes(new Callback<VotesContainer>() {

@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.webkit.WebView;
 
 import com.masterofcode.pulse.models.containers.PushNotificationToken;
+import com.masterofcode.pulse.models.containers.User;
 import com.masterofcode.pulse.network.gcm.GCMHelper;
 import com.masterofcode.pulse.ui.BaseActivity;
 import com.masterofcode.pulse.ui.VotesActivity;
@@ -44,18 +45,7 @@ public class LoginActivity extends BaseActivity {
                     public void onTokenParsed(String accessToken, String refreshToken) {
                         Log.d("x", String.format("accessToken: %s; refreshToken: %s", accessToken, refreshToken));
                         App.setTokenMocId(accessToken);
-                        App.getIDService().setPushNotificationToken(new PushNotificationToken(token), new Callback<Object>() {
-                            @Override
-                            public void success(Object o, Response response) {
-                                showToast("Push notification token successfully set!");
-                                startActivity(new Intent(LoginActivity.this, VotesActivity.class));
-                            }
-
-                            @Override
-                            public void failure(RetrofitError error) {
-                                showToast("Push notification set error!");
-                            }
-                        });
+                        setPushToken(token);
 
                     }
 
@@ -66,6 +56,43 @@ public class LoginActivity extends BaseActivity {
                 }).authorize();
             }
         });
+    }
+
+    private void setPushToken(String token) {
+
+        App.getIDService().setPushNotificationToken(new PushNotificationToken(token), new Callback<Object>() {
+            @Override
+            public void success(Object o, Response response) {
+                showToast("Push notification token successfully set!");
+                getUser();
+
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                showToast("set push token error!");
+            }
+        });
+
+
+    }
+
+    private void getUser() {
+
+        App.getIDService().getUser(new Callback<User>() {
+            @Override
+            public void success(User user, Response response) {
+                App.setTokenPulse(user.getAppData().getVoteApiToken());
+                startActivity(new Intent(LoginActivity.this, VotesActivity.class));
+                LoginActivity.this.finish();
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                showToast("get user error!");
+            }
+        });
+
     }
 
     @Override
