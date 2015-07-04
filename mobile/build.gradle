@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion 22
@@ -32,6 +33,9 @@ dependencies {
     wearApp project(':wear')
     compile 'com.android.support:appcompat-v7:22.2.0'
 
+    compile "com.android.support:cardview-v7:+"
+    compile "com.android.support:recyclerview-v7:+"
+
     compile 'com.google.android.gms:play-services:7.5.0'
     compile 'com.google.android.gms:play-services-gcm:7.3.0'
 
@@ -49,4 +53,7 @@ dependencies {
     compile 'com.koushikdutta.ion:ion:2.+'
 
     compile 'me.alexrs:prefs:1.1.0'
+
+//    compile 'com.hannesdorfmann.fragmentargs:annotation:2.0.1'
+//    apt 'com.hannesdorfmann.fragmentargs:processor:2.0.1'
 }
