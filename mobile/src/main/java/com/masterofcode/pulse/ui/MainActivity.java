@@ -1,4 +1,4 @@
-package com.masterofcode.pulse;
+package com.masterofcode.pulse.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,10 +6,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.masterofcode.pulse.App;
+import com.masterofcode.pulse.R;
 import com.masterofcode.pulse.models.Vote;
 import com.masterofcode.pulse.models.containers.VotesContainer;
 import com.masterofcode.pulse.network.gcm.NotificationHelper;
-import com.masterofcode.pulse.ui.BaseActivity;
 
 import java.util.List;
 import java.util.Random;

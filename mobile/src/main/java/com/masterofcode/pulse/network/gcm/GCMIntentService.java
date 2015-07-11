@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 
-import com.masterofcode.pulse.MainActivity;
+import com.masterofcode.pulse.ui.MainActivity;
 import com.masterofcode.pulse.R;
 
 public class GCMIntentService extends IntentService {

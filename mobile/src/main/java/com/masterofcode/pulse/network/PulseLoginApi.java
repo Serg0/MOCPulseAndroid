@@ -1,4 +1,4 @@
-package com.masterofcode.pulse;
+package com.masterofcode.pulse.network;
 
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -21,8 +21,8 @@ public class PulseLoginApi
   private static final String CLIENT_SECRET = "847bb22841f7950052f719202168e81c1500bde58979e8da7a296312b0b1f1db";
   private static final String REDIRECT_URI = "http://localhost/Callback";
 
-  private static final String AUTHORIZE_URL = "http://192.168.4.121:3000/oauth/authorize?client_id=%s&response_type=code&redirect_uri=%s";
-  private static final String REQUEST_TOKEN_URL = "http://192.168.4.121:3000/oauth/token";
+  private static final String AUTHORIZE_URL = NetworkHelper.MOC_ID_API_ENDPOINT + "/oauth/authorize?client_id=%s&response_type=code&redirect_uri=%s";
+  private static final String REQUEST_TOKEN_URL = NetworkHelper.MOC_ID_API_ENDPOINT +  "/oauth/token";
 
   private WebView mWebView;
   private Callback callback;

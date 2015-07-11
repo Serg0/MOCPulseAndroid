@@ -8,7 +8,7 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.masterofcode.pulse.App;
-import com.masterofcode.pulse.LoginActivity;
+import com.masterofcode.pulse.ui.LoginActivity;
 
 import retrofit.ErrorHandler;
 import retrofit.RequestInterceptor;
@@ -23,9 +23,10 @@ import retrofit.converter.GsonConverter;
 public class NetworkHelper {
 
 //    public static final String PULSE_API_ENDPOINT = "http://192.168.4.71:3000";
-    public static final String PULSE_API_ENDPOINT = "http://192.168.4.51:3000";
+//    public static final String PULSE_API_ENDPOINT = "192.168.4.63:8080"; //Dima
+    public static final String PULSE_API_ENDPOINT = "http://192.168.4.118:3000";// me
 //    public static final String PULSE_API_ENDPOINT = "http://192.168.4.81:3000";
-    public static final String MOC_ID_API_ENDPOINT = "http://192.168.4.121:3000";
+    public static final String MOC_ID_API_ENDPOINT = " http://fritzvl.info:80";
 
     public static PulseApiService pulseApiService;
     public static MOCIDApiService mocIdApiService;

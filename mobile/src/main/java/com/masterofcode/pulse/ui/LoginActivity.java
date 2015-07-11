@@ -1,4 +1,4 @@
-package com.masterofcode.pulse;
+package com.masterofcode.pulse.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,11 +7,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
 
+import com.masterofcode.pulse.App;
+import com.masterofcode.pulse.R;
 import com.masterofcode.pulse.models.containers.PushNotificationToken;
 import com.masterofcode.pulse.models.containers.User;
+import com.masterofcode.pulse.network.PulseLoginApi;
 import com.masterofcode.pulse.network.gcm.GCMHelper;
-import com.masterofcode.pulse.ui.BaseActivity;
-import com.masterofcode.pulse.ui.VotesActivity;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;

@@ -30,7 +30,7 @@
         android:theme="@style/AppTheme" >
 
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:launchMode="singleTask">
@@ -41,7 +41,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.LoginActivity"
             android:label="@string/title_activity_login"
             android:screenOrientation="portrait">
         </activity>
@@ -52,9 +52,6 @@
         <activity
             android:name=".ui.VotesActivity"
             android:screenOrientation="portrait">
-        </activity>
-        <activity
-            android:name=".GCMActivity">
         </activity>
 
         <!-- For receiving GCM message and registration success -->
