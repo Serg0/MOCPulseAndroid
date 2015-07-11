@@ -98,6 +98,7 @@ public class VotesActivity extends BaseActivity {
             //TODO open single voting
             Intent intent = new Intent(this, VoteActivity.class);
             intent.putExtra(Vote.class.getSimpleName(), votes.iterator().next());
+            intent.putExtra(VoteActivity.MODE.class.getSimpleName(), VoteActivity.MODE.VOTE.ordinal());
             startActivity(intent);
         }else{
             //TODO open vote list

@@ -72,8 +72,10 @@ public class VotesListAdapter extends RecyclerView.Adapter<VotesListAdapter.View
         @OnClick(R.id.card)
         public void onClicked() {
             Intent intent = new Intent(context, VoteActivity.class);
-            intent.putExtra(Vote.class.getSimpleName(), votes.get(getAdapterPosition()));
-            context.startActivity(intent);
+            final Vote vote = votes.get(getAdapterPosition());
+            intent.putExtra(Vote.class.getSimpleName(), vote);
+            intent.putExtra(VoteActivity.MODE.class.getSimpleName(), vote.isPending() ? VoteActivity.MODE.VOTE.ordinal() : VoteActivity.MODE.RESULT.ordinal());
+                    context.startActivity(intent);
         }
     }
 

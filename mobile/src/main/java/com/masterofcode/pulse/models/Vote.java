@@ -5,6 +5,8 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
 
+import java.util.Random;
+
 /**
  * Created by Serhii Nadolynskyi <serhii.nadolinskyi@gmail.com> on 04.07.15.
  */
@@ -18,6 +20,11 @@ public class Vote implements Parcelable {
     private Integer type;
     @Expose
     private String result;
+
+    public boolean isPending(){
+        //TODO implement logic
+        return new Random().nextBoolean();
+    }
 
     public String getName() {
         return name;
