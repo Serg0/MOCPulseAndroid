@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Pulse</string>
+    <string name="app_name">MOC Pulse</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -13,4 +13,7 @@
     <string name="vote_me">Vote me!</string>
     <string name="pending">Pending</string>
     <string name="voted">Voted</string>
+
+
+
 </resources>

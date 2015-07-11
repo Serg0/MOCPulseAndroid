@@ -10,6 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.masterofcode.pulse.App;
 import com.masterofcode.pulse.R;
 import com.masterofcode.pulse.adapters.VoteTabsAdapter;
@@ -17,6 +19,9 @@ import com.masterofcode.pulse.models.Vote;
 import com.masterofcode.pulse.models.containers.VotesContainer;
 import com.masterofcode.pulse.network.gcm.NotificationHelper;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import butterknife.ButterKnife;
@@ -92,7 +97,7 @@ public class VotesActivity extends BaseActivity {
         }else if(votes.size() == 1){
             //TODO open single voting
             Intent intent = new Intent(this, VoteActivity.class);
-            intent.putExtra(VoteActivity.EXTRA_VOTE, votes.iterator().next());
+            intent.putExtra(Vote.class.getSimpleName(), votes.iterator().next());
             startActivity(intent);
         }else{
             //TODO open vote list
@@ -106,14 +111,8 @@ public class VotesActivity extends BaseActivity {
         App.getService().getVotes(new Callback<VotesContainer>() {
             @Override
             public void success(VotesContainer votesContainer, Response response) {
-                PagerAdapter adapter = new VoteTabsAdapter(
-                        VotesActivity.this,
-                        getSupportFragmentManager(),
-                        votesContainer.getVotes()
-                );
-                pager.setAdapter(adapter);
-                tabs.setTabsFromPagerAdapter(adapter);
-                pager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
+                final ArrayList<Vote> votes = votesContainer.getVotes();
+                showVotes(votes);
             }
 
             @Override
@@ -121,6 +120,33 @@ public class VotesActivity extends BaseActivity {
                 showToast("RetrofitError getting votes");
             }
         });
+
+        showMockVotes();
+    }
+
+    private void showMockVotes() {
+        //TODO Remove after tests
+
+        VotesContainer vc = new Gson().fromJson("{\"votes\":[{\"name\":\"neque praesentium\"," +
+                "\"id\":17747554,\"type\":-82275085,\"result\":\"voluptas soluta esse ipsum\"}," +
+                "{\"name\":\"sit est suscipit hic fuga\",\"id\":74727241,\"type\":11756814}," +
+                "{\"name\":\"sit\",\"id\":34057864,\"type\":30802274}," +
+                "{\"name\":\"ut quo mollitia et\",\"id\":-10128286,\"type\":-67942656}," +
+                "{\"name\":\"enim ducimus\",\"id\":6183154,\"type\":-49440212}]}"
+                , VotesContainer.class);
+        showVotes(vc.getVotes());
+
+    }
+
+    private void showVotes(ArrayList<Vote> votes) {
+        PagerAdapter adapter = new VoteTabsAdapter(
+                VotesActivity.this,
+                getSupportFragmentManager(),
+                votes
+        );
+        pager.setAdapter(adapter);
+        tabs.setTabsFromPagerAdapter(adapter);
+        pager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabs));
     }
 
 }

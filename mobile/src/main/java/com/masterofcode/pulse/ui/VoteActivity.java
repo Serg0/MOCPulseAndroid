@@ -18,16 +18,14 @@ import butterknife.OnClick;
  */
 public class VoteActivity extends BaseActivity {
 
-    public static final String EXTRA_VOTE = "vote";
-
-    @InjectView(R.id.text)
-    TextView text;
-    @InjectView(R.id.green)
-    View green;
-    @InjectView(R.id.yellow)
-    View yellow;
-    @InjectView(R.id.red)
-    View red;
+    @InjectView(R.id.tvVoteName)
+    TextView tvVoteName;
+    @InjectView(R.id.greenPole)
+    View greenPole;
+    @InjectView(R.id.yellowPole)
+    View yellowPole;
+    @InjectView(R.id.redPole)
+    View redPole;
 
     private Vote vote;
 
@@ -36,18 +34,32 @@ public class VoteActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vote);
         ButterKnife.inject(this);
-        vote = getIntent().getParcelableExtra(EXTRA_VOTE);
+        vote = getIntent().getParcelableExtra(Vote.class.getSimpleName());
         if (vote == null) {
             Log.e(App.TAG, "vote == null");
         } else {
             Log.d(App.TAG, "vote: "+vote.toString());
-            text.setText(vote.getName());
+            tvVoteName.setText(vote.getName());
         }
     }
 
-    @OnClick({R.id.green, R.id.yellow, R.id.red})
-    public void onBtnClicked() {
-        showToast("Vote btn clicked.");
+    @OnClick({R.id.greenVote, R.id.yellowVote, R.id.redVote})
+    public void onBtnVoteClicked(View v) {
+        switch (v.getId()){
+            case R.id.greenVote:{
+                showToast("greenVote btn clicked.");
+                break;
+            }
+            case R.id.yellowVote:{
+                showToast("yellowVote btn clicked.");
+                break;
+            }
+            case R.id.redVote:{
+                showToast("redVote btn clicked.");
+                break;
+            }
+        }
+
     }
 
 }

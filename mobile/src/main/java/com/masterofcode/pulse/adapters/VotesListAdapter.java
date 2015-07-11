@@ -72,7 +72,7 @@ public class VotesListAdapter extends RecyclerView.Adapter<VotesListAdapter.View
         @OnClick(R.id.card)
         public void onClicked() {
             Intent intent = new Intent(context, VoteActivity.class);
-            intent.putExtra(VoteActivity.EXTRA_VOTE, votes.get(getAdapterPosition()));
+            intent.putExtra(Vote.class.getSimpleName(), votes.get(getAdapterPosition()));
             context.startActivity(intent);
         }
     }

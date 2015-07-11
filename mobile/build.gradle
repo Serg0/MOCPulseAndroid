@@ -55,6 +55,8 @@ dependencies {
 
     compile 'me.alexrs:prefs:1.1.0'
 
+    compile 'com.android.support:percent:22.2.0'
+
 //    compile 'com.hannesdorfmann.fragmentargs:annotation:2.0.1'
 //    apt 'com.hannesdorfmann.fragmentargs:processor:2.0.1'
 }
