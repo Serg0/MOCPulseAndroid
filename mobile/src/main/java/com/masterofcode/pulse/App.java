@@ -18,7 +18,7 @@ public class App extends Application {
     public static final String TAG = "Pulse";
 
     public static String TOKEN_MOC_ID = null;
-    public static String TOKEN_PULSE = null;
+    public static String TOKEN_PULSE = "123123";//temporary static token
     private static App instance;
 
     @Override

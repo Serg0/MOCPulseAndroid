@@ -69,7 +69,7 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
 
-        startActivity(new Intent(this, LoginActivity.class));
+//        startActivity(new Intent(this, LoginActivity.class));
 //        startActivity(new Intent(this, VotesActivity.class));
 
     }
@@ -80,6 +80,7 @@ public class MainActivity extends BaseActivity {
         NotificationHelper.cancelAll();
     }
 
+    //TODO remove after notifications UI implementation and testing
     private void testNotifications() {
         final Vote vote = new Vote();
         final int id = new Random().nextInt();
