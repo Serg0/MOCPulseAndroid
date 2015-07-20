@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.util.Log;
 
 import com.masterofcode.pulse.ui.MainActivity;
 import com.masterofcode.pulse.R;
@@ -32,6 +33,8 @@ public class GCMIntentService extends IntentService {
          String serverTime = extras.getString("timestamp");
          sendNotification("Message: " + message + "\n" + "Server Time: "
                + serverTime);
+
+          Log.d("GCMHelper", "message " + message);
       }
       // Release the wake lock provided by the WakefulBroadcastReceiver.
       GcmBroadcastReceiver.completeWakefulIntent(intent);

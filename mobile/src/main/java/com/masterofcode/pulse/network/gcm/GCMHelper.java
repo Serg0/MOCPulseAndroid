@@ -5,6 +5,7 @@ import android.content.ContextWrapper;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -30,6 +31,7 @@ public class GCMHelper extends ContextWrapper{
     GoogleCloudMessaging gcm;
     private BaseActivity activity;
     private GCMCallBack cb;
+    private String LOG_TAG = "GCMHelper";
 
     public interface GCMCallBack{
         void onError(String error);
@@ -57,6 +59,8 @@ public class GCMHelper extends ContextWrapper{
             if (TextUtils.isEmpty(gcmRegId)) {
                 new GCMRegistrationTask().execute();
             }else{
+
+                Log.d(LOG_TAG, "PREF_GCM_REG_ID " + gcmRegId);
                 cb.onSuccess(gcmRegId);
                 showMessage(getString(R.string.already_registerred_gcm));
             }
@@ -120,7 +124,7 @@ public class GCMHelper extends ContextWrapper{
                 cb.onSuccess(gcmRegId);
                 showMessage(getString(R.string.registered_gcm));
                 saveInSharedPref(result);
-
+                Log.d(LOG_TAG, "PREF_GCM_REG_ID " + gcmRegId);
             }else{
                 cb.onError(getString(R.string.gcm_registration_failed));
             }
